@@ -8,7 +8,7 @@ const HOST = process.env.HSD_HOST || '127.0.0.1';
 const HSD_API_KEY = process.env.HSD_API_KEY;
 
 const rpcClient = new RpcClient({
-  protocol: 'https',
+  protocol: 'http',
   user: 'x', // eslint-disable-line object-shorthand
   pass: HSD_API_KEY, // eslint-disable-line object-shorthand
   host: HOST,
@@ -68,7 +68,12 @@ function getBestBlockHash() {
 }
 
 function getBlockHash(height) {
-  return promiseifyParam(rpcClient, rpcClient.getBlockHash, height, 'block height');
+  return promiseifyParam(
+    rpcClient,
+    rpcClient.getBlockHash,
+    height,
+    'block height'
+  );
 }
 
 function getBlock(hash) {
@@ -76,7 +81,13 @@ function getBlock(hash) {
 }
 
 function getTransaction(txid) {
-  return promiseifyParamTwo(rpcClient, rpcClient.getRawTransaction, txid, 1, 'transaction info');
+  return promiseifyParamTwo(
+    rpcClient,
+    rpcClient.getRawTransaction,
+    txid,
+    1,
+    'transaction info'
+  );
 }
 
 function getBlockChainInfo() {
